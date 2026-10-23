@@ -1,0 +1,5 @@
+out/
+.poc/
+.git/
+*.log
+blog_post_php2shell.html

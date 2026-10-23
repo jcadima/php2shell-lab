@@ -1,0 +1,29 @@
+services:
+  vuln:
+    build:
+      context: .
+      args:
+        # Pinned by digest. Do not replace this with a floating tag if you want
+        # the offsets in the writeup to match.
+        PHP_IMAGE: php:8.4.26-apache@sha256:60111400ff77bdc44fa79b4f072afe49a42abba71e0846ad496be4761dc9c11a
+    platform: linux/amd64
+    image: php2shell-lab:8.4.26
+    container_name: php2shell-vuln
+    ports:
+      - "127.0.0.1:18088:80"
+    volumes:
+      - ./out:/out
+
+  patched:
+    profiles: ["patched"]
+    build:
+      context: .
+      args:
+        PHP_IMAGE: php:8.4.27-apache@sha256:a0b75cee7023ba2c127138dcad2ecc6ec7e09435534645e70450f29f24ea2a5a
+    platform: linux/amd64
+    image: php2shell-lab:8.4.27
+    container_name: php2shell-patched
+    ports:
+      - "127.0.0.1:18089:80"
+    volumes:
+      - ./out:/out
